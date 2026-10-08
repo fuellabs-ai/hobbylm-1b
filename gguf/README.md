@@ -39,6 +39,8 @@ sha256sum hobbylm-1b-sft-3450-F32.gguf      # compare with SHA256SUMS.txt in har
 
 The `bailingmoe2` code in llama.cpp assumes a query width equal to the hidden size. HobbyLM's is 2048 against a hidden size of 1024. Run the files with the patched runtimes from the [v1.0.0 release](https://github.com/fuellabs-ai/hobbylm-1b/releases/tag/v1.0.0), or apply [`bailingmoe2_decoupled_head_dim.patch`](../runtimes/llama.cpp/patches/bailingmoe2_decoupled_head_dim.patch) to llama.cpp `63bef272` and build (see [`runtimes/`](../runtimes/)). **Stock Ollama v0.35.1 does not load these files (tested).**
 
+**Why do the files say `bailingmoe2`?** `bailingmoe2` is the name of an architecture already built into llama.cpp, added for inclusionAI's Ling 2.0 models (`BailingMoeV2`). HobbyLM is not based on, derived from or affiliated with those models: it was designed and trained from scratch (architecture by Harish; trained by Fuel Labs). The GGUF files reuse this llama.cpp code path only because its layout matches HobbyLM's: a sigmoid-routed mixture of experts with expert-bias selection, a shared expert and a leading dense layer, plus grouped-query attention with QK-norm. The one difference, HobbyLM's 2,048-wide attention against a 1,024 hidden size, is what `bailingmoe2_decoupled_head_dim.patch` fixes.
+
 ## What the converter asserts
 
 The converter reads every hyper-parameter from `config.json`. It refuses configurations it does not handle:

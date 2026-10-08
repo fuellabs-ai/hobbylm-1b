@@ -6,6 +6,8 @@ HobbyLM-1B's GGUF files need a patched llama.cpp (or the patched Ollama runtime)
 
 These are unofficial builds: not produced, reviewed or endorsed by the llama.cpp/ggml or Ollama projects. Tested only on Windows 11 x86-64, CPU backend, one machine.
 
+**Why do the files say `bailingmoe2`?** `bailingmoe2` is the name of an architecture already built into llama.cpp, added for inclusionAI's Ling 2.0 models (`BailingMoeV2`). HobbyLM is not based on, derived from or affiliated with those models: it was designed and trained from scratch (architecture by Harish; trained by Fuel Labs). The GGUF files reuse this llama.cpp code path only because its layout matches HobbyLM's: a sigmoid-routed mixture of experts with expert-bias selection, a shared expert and a leading dense layer, plus grouped-query attention with QK-norm. The one difference, HobbyLM's 2,048-wide attention against a 1,024 hidden size, is what `bailingmoe2_decoupled_head_dim.patch` fixes.
+
 | Path | Contents |
 |---|---|
 | [`llama.cpp/`](llama.cpp/) | For llama.cpp `63bef2728d5714a5c2fe1524ad39d81b693890f3`: the QKV-shape patch (`bailingmoe2_decoupled_head_dim.patch`), the Windows exit fix (`004-win-exit-hang-stream-sessions-static.patch`), [`BUILD.md`](llama.cpp/BUILD.md), the build script and toolchain record, and the launchers `start-chat-server.bat` / `run-base-completion.bat`. |
