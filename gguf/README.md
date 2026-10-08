@@ -1,6 +1,6 @@
 # GGUF converter for HobbyLM-1B
 
-`to_gguf_1b.py` converts a released HobbyLM-1B Hugging Face model folder into an **F32 GGUF** in llama.cpp's `bailingmoe2` architecture layout. It produced the F32 files published in [`gguf/` in harims95/hobbylm-1b-hf](https://huggingface.co/harims95/hobbylm-1b-hf/tree/main/gguf). The Q8_0 and Q4_K_M files were then made with llama.cpp's `llama-quantize`.
+`to_gguf_1b.py` converts a released HobbyLM-1B Hugging Face model folder into an **F32 GGUF** in llama.cpp's `bailingmoe2` architecture layout. It produced the F32 files published in [harims95/hobbylm-1B-gguf](https://huggingface.co/harims95/hobbylm-1B-gguf). The Q8_0 and Q4_K_M files were then made with llama.cpp's `llama-quantize`.
 
 **Reproducibility check (2026-10-07):** in a clean environment, it regenerated the published `hobbylm-1b-sft-3450-F32.gguf` **bit for bit** (SHA-256 `649220cef142151e6b38140a4a77123795732bb57421474019ebe4811264ac33`).
 
@@ -23,16 +23,16 @@ The input folder must hold the released model files **and** the tokenizer files:
 - `tokenizer.json` and `tokenizer_config.json`.
 
 ```bash
-huggingface-cli download harims95/hobbylm-1b-checkpoints-hf --revision bdc371b4aa48bede3f55ba1036e9f27952f48c17 --include "sft-step3450/*" --local-dir ckpt
-mv ckpt/sft-step3450 ckpt/sft             # the folder name is written into the file (general.name "HobbyLM-1B (sft)")
+huggingface-cli download harims95/hobbylm-1B-instruct --revision 0506eed260c353a259712705fa2eb11662f1f0ac --local-dir ckpt/sft
+# the folder name "sft" is written into the file (general.name "HobbyLM-1B (sft)")
 python to_gguf_1b.py ckpt/sft hobbylm-1b-sft-3450-F32.gguf
-sha256sum hobbylm-1b-sft-3450-F32.gguf      # compare with gguf/SHA256SUMS.txt in harims95/hobbylm-1b-hf at dc11aab4e06fd2000313c8821557a86e8368bf58
+sha256sum hobbylm-1b-sft-3450-F32.gguf      # compare with SHA256SUMS.txt in harims95/hobbylm-1B-gguf
 ```
 
-- **Revisions:** `bdc371b4…` is the checkpoint-repo revision of the converter's *input* (safetensors, config, tokenizer). The published GGUF files are in `harims95/hobbylm-1b-hf/gguf/` at `dc11aab4e06fd2000313c8821557a86e8368bf58`, the hub commit that added them.
-- **Same input files:** the `config.json`, `model.safetensors` and tokenizer files in `sft-step3450/` are byte-identical to the files the bit-for-bit reproduction used (the release revision of the former SFT repository plus the release tokenizer).
+- **Revisions:** `0506eed2…` is the `hobbylm-1B-instruct` revision of the converter's *input* (safetensors, config, tokenizer). The published GGUF files are in [`harims95/hobbylm-1B-gguf`](https://huggingface.co/harims95/hobbylm-1B-gguf) at `f8bc034403026b2706f5275702d3801753b87c34`.
+- **Same input files:** the `config.json`, `model.safetensors` and tokenizer files of `hobbylm-1B-instruct` are byte-identical to the files the bit-for-bit reproduction used (the release revision of the former SFT repository plus the release tokenizer).
 - **Folder name:** the converter stores the input folder's name in the GGUF metadata (`general.name`). The published files were converted from folders named `sft` and `base`. Any other name changes the file's checksum, though not the model.
-- **Base model:** the same steps with `--include "base-anneal-final/*"`, renaming `ckpt/base-anneal-final` to `ckpt/base`, give `hobbylm-1b-base-F32.gguf` (context 1024, no chat template). Alternatively, use the base files at the root of `harims95/hobbylm-1b-hf`.
+- **Base model:** download `harims95/hobbylm-1b-checkpoints` at `3aded72dc807683cb9b85c20cfffceaf1f72406c` with `--include "base-anneal-final/*" --local-dir ckpt`, rename `ckpt/base-anneal-final` to `ckpt/base`, and convert it to `hobbylm-1b-base-F32.gguf` (context 1024, no chat template).
 - **Quantised files:** `llama-quantize <F32.gguf> <out.gguf> Q8_0` (or `Q4_K_M`). The router and expert-bias tensors stay F32.
 
 ## Running the GGUF

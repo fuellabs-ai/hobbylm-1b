@@ -7,12 +7,12 @@ import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # Released files, pinned to immutable revisions.
-BASE = dict(repo="harims95/hobbylm-1b-hf", subfolder=None,
+BASE = dict(repo="harims95/hobbylm-1B", subfolder=None,
             model_rev="a5bb6bcdab3642acbb203c2b6b6c272669da3693",      # weights used for the release evaluation
             tok_rev="dc11aab4e06fd2000313c8821557a86e8368bf58")        # first revision with the tokenizer files
-SFT = dict(repo="harims95/hobbylm-1b-checkpoints-hf", subfolder="sft-step3450",
-           model_rev="bdc371b4aa48bede3f55ba1036e9f27952f48c17",
-           tok_rev="bdc371b4aa48bede3f55ba1036e9f27952f48c17")
+SFT = dict(repo="harims95/hobbylm-1B-instruct", subfolder=None,
+           model_rev="0506eed260c353a259712705fa2eb11662f1f0ac",
+           tok_rev="0506eed260c353a259712705fa2eb11662f1f0ac")
 
 
 def parse_args(description):

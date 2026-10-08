@@ -15,7 +15,7 @@ These are unofficial builds: not produced, reviewed or endorsed by the llama.cpp
 
 All text files here are byte-identical to the files inside the v1.0.0 packages and source archive. Build scripts write local work-directory paths as `$WORK`.
 
-**Known outdated reference:** `chat-bundle/READ ME FIRST.txt` (as shipped in 1.0.0) points to `huggingface.co/harims95/hobbylm-1b-broad-sft-3450-hf` for training-data licence questions; that repository is no longer public. The same information is in the `NOTICE` file and the "Training-data licence notes" section of the [main model card](https://huggingface.co/harims95/hobbylm-1b-hf).
+**Known outdated reference:** `chat-bundle/READ ME FIRST.txt` (as shipped in 1.0.0) points to `huggingface.co/harims95/hobbylm-1b-broad-sft-3450-hf` for training-data licence questions; that repository is no longer public. The same information is in the `NOTICE` file and the "Training-data licence notes" section of the [base model card](https://huggingface.co/harims95/hobbylm-1B).
 
 ## Licence
 

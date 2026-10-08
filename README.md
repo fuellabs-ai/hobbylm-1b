@@ -12,11 +12,12 @@ Two models are released:
 |---|---|
 | **Try it in the browser** | [HobbyLM-1B chat (Hugging Face Space)](https://huggingface.co/spaces/harims95/hobbylm-1b-chat) |
 | **Run it on Windows, easiest** | [Double-click chat bundle](https://github.com/fuellabs-ai/hobbylm-1b/releases/tag/v1.0.0): download `HobbyLM-1B-Chat-Windows-x64-1.0.0.zip`, extract, double-click **`Start HobbyLM.bat`**. The chat opens in your browser and runs offline on your computer. |
-| Main model page, base model (Transformers) | [harims95/hobbylm-1b-hf](https://huggingface.co/harims95/hobbylm-1b-hf): model card, release evaluation, base model files |
-| Instruction-tuned model and all lineage checkpoints (Transformers) | [harims95/hobbylm-1b-checkpoints-hf](https://huggingface.co/harims95/hobbylm-1b-checkpoints-hf): subfolder `sft-step3450` (instruction-tuned), plus pretraining, anneal, final base and 4K context-extension checkpoints |
-| GGUF files | [`gguf/` in harims95/hobbylm-1b-hf](https://huggingface.co/harims95/hobbylm-1b-hf/tree/main/gguf): SFT Q4_K_M, Q8_0, F32; base F32. Converter: [`gguf/`](gguf/) (reproduces the published F32 file bit for bit) |
+| Base model (Transformers) | [harims95/hobbylm-1B](https://huggingface.co/harims95/hobbylm-1B): final annealed base, model card, release evaluation |
+| Instruct model (Transformers) | [harims95/hobbylm-1B-instruct](https://huggingface.co/harims95/hobbylm-1B-instruct): Broad-Instruct SFT step 3450 at the repository root |
+| GGUF files | [harims95/hobbylm-1B-gguf](https://huggingface.co/harims95/hobbylm-1B-gguf): instruct Q4_K_M, Q8_0, F32; base F32. Converter: [`gguf/`](gguf/) (reproduces the published F32 file bit for bit) |
+| Checkpoints (Transformers) | [harims95/hobbylm-1b-checkpoints](https://huggingface.co/harims95/hobbylm-1b-checkpoints): final annealed base, 4K context extension and instruct, one subfolder each |
 | Patched runtimes (Windows, CPU) | [Release page](https://github.com/fuellabs-ai/hobbylm-1b/releases/tag/v1.0.0): patched llama.cpp, patched Ollama, and their source archive. Patches, launchers and build steps: [`runtimes/`](runtimes/) |
-| Evaluation method and results | the **Evaluation Results** section of the [main model card](https://huggingface.co/harims95/hobbylm-1b-hf) |
+| Evaluation method and results | the **Evaluation Results** section of the [base model card](https://huggingface.co/harims95/hobbylm-1B) |
 
 ## Repository contents
 
