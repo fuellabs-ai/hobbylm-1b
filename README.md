@@ -1,4 +1,4 @@
-<p align="center"><img src="assets/fuellabs-wordmark.svg" width="220" alt="Fuel Labs"></p>
+<p align="center"><img src="assets/fuellabs-banner.jpg" width="100%" alt="Fuel Labs"></p>
 
 # HobbyLM-1B
 
