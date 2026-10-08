@@ -2,7 +2,7 @@
 
 Values are read from the released `config.json` files. The code is in [`hobbylm_hf/modeling_hobbylm.py`](hobbylm_hf/modeling_hobbylm.py).
 
-| | Base | SFT step 3450 |
+| | Base | Instruct |
 |---|---|---|
 | Parameters | 1,037,121,536 total; 304,953,344 active per token | same |
 | Context (`max_position_embeddings`) | 1,024 | 4,096 |
@@ -35,4 +35,4 @@ Keep the model in float32. With top-8-of-64 routing, the router-score gap betwee
 ## Tokenizer and chat template
 
 - GPT-2 byte-level BPE; no BOS/EOS is added automatically; `<|endoftext|>` (50256) ends generation.
-- The SFT model's chat template is in its `tokenizer_config.json` on Hugging Face; [`examples/chat_sft.py`](examples/chat_sft.py) applies it. The base model has no chat template.
+- The Instruct model's chat template is in its `tokenizer_config.json` on Hugging Face; [`examples/chat_sft.py`](examples/chat_sft.py) applies it. The base model has no chat template.

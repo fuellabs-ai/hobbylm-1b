@@ -6,14 +6,14 @@ A small **sparse mixture-of-experts** language model, trained from scratch on **
 
 Two models are released:
 - the **base** model (text continuation);
-- an **instruction-tuned** model, **Broad-Instruct SFT step 3450**, which follows simple instructions, rewrites and extracts text, and makes single function calls in a Python-list format.
+- an **instruction-tuned** model, **HobbyLM-1B Instruct**, which follows simple instructions, rewrites and extracts text, and makes single function calls in a Python-list format.
 
 | | |
 |---|---|
 | **Try it in the browser** | [HobbyLM-1B chat (Hugging Face Space)](https://huggingface.co/spaces/harims95/hobbylm-1b-chat) |
 | **Run it on Windows, easiest** | [Double-click chat bundle](https://github.com/fuellabs-ai/hobbylm-1b/releases/tag/v1.0.0): download `HobbyLM-1B-Chat-Windows-x64-1.0.0.zip`, extract, double-click **`Start HobbyLM.bat`**. The chat opens in your browser and runs offline on your computer. |
 | Base model (Transformers) | [harims95/hobbylm-1B](https://huggingface.co/harims95/hobbylm-1B): final annealed base, model card, release evaluation |
-| Instruct model (Transformers) | [harims95/hobbylm-1B-instruct](https://huggingface.co/harims95/hobbylm-1B-instruct): Broad-Instruct SFT step 3450 at the repository root |
+| Instruct model (Transformers) | [harims95/hobbylm-1B-instruct](https://huggingface.co/harims95/hobbylm-1B-instruct): HobbyLM-1B Instruct at the repository root |
 | GGUF files | [harims95/hobbylm-1B-gguf](https://huggingface.co/harims95/hobbylm-1B-gguf): instruct Q4_K_M, Q8_0, F32; base F32. Converter: [`gguf/`](gguf/) (reproduces the published F32 file bit for bit) |
 | Checkpoints (Transformers) | [harims95/hobbylm-1b-checkpoints](https://huggingface.co/harims95/hobbylm-1b-checkpoints): final annealed base, 4K context extension and instruct, one subfolder each |
 | Patched runtimes (Windows, CPU) | [Release page](https://github.com/fuellabs-ai/hobbylm-1b/releases/tag/v1.0.0): patched llama.cpp, patched Ollama, and their source archive. Patches, launchers and build steps: [`runtimes/`](runtimes/) |
@@ -24,7 +24,7 @@ Two models are released:
 | Path | What it is |
 |---|---|
 | [`hobbylm_hf/`](hobbylm_hf/) | Model architecture and configuration (`modeling_hobbylm.py`, `configuration_hobbylm.py`). Byte-identical to the files that `trust_remote_code=True` loads from the Hugging Face repositories. |
-| [`examples/`](examples/) | Runnable inference examples: base-model completion, SFT chat with the chat template, and a 4,096-token input with the SFT model. |
+| [`examples/`](examples/) | Runnable inference examples: base-model completion, Instruct chat with the chat template, and a 4,096-token input with the Instruct model. |
 | [`gguf/`](gguf/) | GGUF converter (reproduces the published F32 file bit for bit) and its instructions. |
 | [`runtimes/`](runtimes/) | Patches, launchers and build instructions for the patched llama.cpp and Ollama runtimes in the release. |
 | [`ARCHITECTURE.md`](ARCHITECTURE.md) | Architecture details read from the released configuration. |
@@ -40,7 +40,7 @@ cd hobbylm-1b
 pip install -r requirements.txt
 python examples/generate_base.py          # base model, text completion
 python examples/chat_sft.py               # instruction-tuned model, chat template
-python examples/long_input_4k.py          # SFT model with a ~3,900-token input
+python examples/long_input_4k.py          # Instruct model with a ~3,900-token input
 ```
 
 The examples download the released weights from Hugging Face (about 4.2 GB per model) and pin exact revisions. They load the model code that ships with the weights; [`hobbylm_hf/`](hobbylm_hf/) holds the same code for reading and for offline use (`--local-code`).
@@ -65,7 +65,7 @@ HobbyLM: We are currently reviewing the proposal document that was submitted to 
 
 The release evaluation covers 11 benchmarks, both models, all 0-shot: lm-evaluation-harness 0.4.13, fp32, all examples of each split.
 
-| Benchmark | Metric | Base | SFT step 3450 |
+| Benchmark | Metric | Base | Instruct |
 |---|---|---:|---:|
 | HellaSwag | acc_norm | 43.66 | 46.64 |
 | ARC-Easy | acc_norm | 54.76 | 54.12 |
@@ -83,18 +83,18 @@ The release evaluation covers 11 benchmarks, both models, all 0-shot: lm-evaluat
 - CommonsenseQA and MMLU are near their random-guess baselines (20% and 25%).
 - No average is given, because the metrics differ.
 
-The chart below is a selected view of positive movements from base to SFT step 3450, not a composite score or a claim that every benchmark improved; the full results, including regressions, are in the table above.
+The chart below is a selected view of positive movements from Base to Instruct, not a composite score or a claim that every benchmark improved; the full results, including regressions, are in the table above.
 
-![Selected gains from HobbyLM Base to the instruction-tuned step-3450 checkpoint on BoolQ, HellaSwag, SciQ, OpenBookQA and PIQA.](assets/hobbylm-sft-selected-gains.png)
+![Selected gains from HobbyLM Base to HobbyLM-1B Instruct on BoolQ, HellaSwag, SciQ, OpenBookQA and PIQA.](assets/hobbylm-sft-selected-gains.png)
 
-**IFEval (SFT step 3450 only; the base model was not evaluated on IFEval).** All 541 prompts; official lm-eval 0.4.13 scoring; the model's chat template; greedy; 2,048-token response budget.
+**IFEval (Instruct only; the base model was not evaluated on IFEval).** All 541 prompts; official lm-eval 0.4.13 scoring; the model's chat template; greedy; 2,048-token response budget.
 
 | Prompt-level strict | Instruction-level strict | Prompt-level loose | Instruction-level loose |
 |---:|---:|---:|---:|
 | 22.92 | 37.77 | 24.95 | 40.53 |
 
 - **Cap hits:** 135 of 541 responses (25.0%) reached the 2,048-token limit; most were flagged as repetitive by a simple heuristic.
-- **Training overlap:** 2 prompts overlap the final SFT training mix. The scores above include them.
+- **Training overlap:** 2 prompts overlap the final instruction-tuning mix. The scores above include them.
 
 ### Published scores of similar small MoE base models (not a matched evaluation)
 
@@ -155,7 +155,7 @@ The rebuilt runtime files are **not code-signed**; Windows may show a warning fo
 - **Router:** sigmoid router with aux-loss-free bias balancing.
 - **Attention:** GQA (16/8 heads, head dim 128) with QK-RMSNorm; plain RoPE (theta 10000).
 - **Embeddings:** tied input and output embeddings; GPT-2 tokenizer.
-- **Context:** base 1,024 tokens; SFT 4,096 configured.
+- **Context:** base 1,024 tokens; Instruct 4,096 configured.
 
 ## Pretraining (base model)
 
@@ -199,7 +199,7 @@ The training, data-preparation and evaluation code is not part of this repositor
 ## Licence
 
 **Apache License 2.0** (`LICENSE`). It covers:
-- the HobbyLM-1B base and SFT step 3450 weights, including their GGUF conversions;
+- the HobbyLM-1B base and Instruct weights, including their GGUF conversions;
 - the HobbyLM architecture and original model code by Harish ([harishsg993010/HobbyLM](https://github.com/harishsg993010/HobbyLM)), released under Apache-2.0 with its author's permission, and derivatives of that code in this repository.
 
 **Not covered:**

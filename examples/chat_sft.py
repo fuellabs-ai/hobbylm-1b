@@ -1,4 +1,4 @@
-"""Instruction-tuned model (SFT step 3450): one chat turn with the released chat template."""
+"""Instruct model: one chat turn with the released chat template."""
 import torch
 
 from _load import load, parse_args
