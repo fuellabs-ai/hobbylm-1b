@@ -1,0 +1,13 @@
+/ucrt64/bin/cmake
+/ucrt64/bin/gcc
+/ucrt64/bin/ninja
+/c/Program Files/nodejs/npm
+/c/Program Files/nodejs/node
+gcc.exe (Rev3, Built by MSYS2 project) 16.2.0
+cmake version 4.4.3
+v24.14.0
+11.9.0
+63bef2728d5714a5c2fe1524ad39d81b693890f3
+ src/models/bailingmoe2.cpp     | 2 +-
+ tools/server/server-stream.cpp | 6 +++++-
+ 2 files changed, 6 insertions(+), 2 deletions(-)

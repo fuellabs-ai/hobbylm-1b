@@ -1,0 +1,87 @@
+HobbyLM-1B Chat for Windows (unofficial research demo)
+=====================================================
+
+HobbyLM-1B is a small language model trained from scratch. This folder lets you chat
+with its instruction-tuned (SFT, step 3450) version in your web browser, on this
+computer only. Nothing is installed, no administrator rights are needed, and nothing
+is downloaded while it runs.
+
+HOW TO USE
+----------
+1. Extract the ZIP file: right-click it, choose "Extract All...", then "Extract".
+   (Do not run anything from inside the ZIP without extracting it.)
+2. Open the extracted folder and double-click "Start HobbyLM.bat".
+   - These files are not code-signed. Windows MAY show a security warning when you
+     open them (for example SmartScreen). What appears for a downloaded copy has not
+     been tested. Only continue if you trust where you got this folder from.
+   - On a work, school or other managed computer, follow your organisation's rules.
+     If its security settings block these files, do not try to get around them; ask
+     your administrator.
+3. A black window opens and, after a few seconds, your web browser opens the chat page
+   (an address like http://127.0.0.1:8080/). Type a message and press Enter.
+   If the browser does not open by itself, copy the address shown in the black window
+   into your browser.
+4. To STOP HobbyLM, close the black window.
+5. To use it again later, just double-click "Start HobbyLM.bat" again.
+   If HobbyLM from this folder is still running, double-clicking again does not start
+   a second copy: it just opens the existing chat page in your browser (the small
+   extra window closes by itself). It only reuses a HobbyLM server started from this
+   same folder; other programs on those ports are left alone.
+
+GOOD TO KNOW
+------------
+- Only this computer can reach the chat page (it listens on 127.0.0.1).
+- If port 8080 is busy, HobbyLM automatically uses the next free port (up to 8099).
+  It never stops or changes other programs.
+- Answers vary each time: the chat page uses random sampling (temperature 0.8) by
+  default. You can change this in the page's Settings.
+- "Stop" in the chat page stops an answer but keeps the partial text in the
+  conversation. Use "New chat" (or delete that message) to start clean.
+- Your conversations are stored only in your browser on this computer.
+- Text chat works fully offline. (Attaching HEIC photos may try to fetch a converter
+  from the internet; attachments were not tested.)
+- About 1.5 GB of free memory is needed while it runs.
+
+LIMITATIONS (please read)
+-------------------------
+- This is a small research model: answers are often wrong, repetitive, or confused
+  about who is speaking. It has no safety tuning and no preference tuning.
+- Tested only on ONE computer: Windows 11, 64-bit, AMD Ryzen 9 5900HX (the
+  AVX2/"Haswell" CPU route). The package contains routes for other x86-64 CPUs, but
+  they have not been tested. Windows on ARM, other Windows versions, Linux and macOS
+  are not supported by this folder.
+- The files are not code-signed.
+
+WHAT IS IN THIS FOLDER
+----------------------
+Start HobbyLM.bat        the launcher you double-click
+model\                   hobbylm-1b-sft-3450-Q4_K_M.gguf (the model, 4-bit quantised)
+                         LICENSE.txt (Apache License 2.0, for the model)
+                         MODEL_NOTICE.txt (what that licence covers; attributions)
+runtime\                 the patched llama.cpp runtime (unofficial build; see
+                         runtime\README.md, runtime\BUILD.md and runtime\patches\)
+support\                 small helpers: open the browser when ready; find an already
+                         running HobbyLM started from this folder
+BUNDLE_MANIFEST_SHA256.txt   checksums of every file in this folder
+
+LICENCES AND OPEN QUESTIONS
+---------------------------
+- Model: the HobbyLM-1B weights, including this GGUF file, are released under the
+  Apache License 2.0 (model\LICENSE.txt). model\MODEL_NOTICE.txt says exactly what
+  it covers and lists the training-data and tokenizer attributions.
+  It does NOT cover the runtime software below.
+- Training data keeps its own terms. Some sources have open licence questions; they
+  are listed in the model card, huggingface.co/harims95/hobbylm-1b-broad-sft-3450-hf
+  ("Training-data licence notes").
+- Runtime software: each component keeps its own licence; see
+  runtime\licenses\THIRD_PARTY_NOTICES.md and runtime\licenses\web-ui\.
+- Source code for the runtime (including the GCC runtime DLLs in runtime\bin, the two
+  HobbyLM patches and the build scripts) is in HobbyLM-Windows-runtimes-source-1.0.0.zip,
+  offered next to this ZIP at the same download location.
+- HobbyLM's own runtime patches (runtime\patches\), the launchers (Start HobbyLM.bat,
+  support\*.ps1, runtime\*.bat) and these instructions: MIT licence, see
+  runtime\licenses\hobbylm\LICENSE (its exact scope is stated there).
+- Not settled (listed so nobody assumes otherwise): the open training-data licence
+  questions mentioned above.
+
+Unofficial build: not produced, reviewed or endorsed by the llama.cpp / ggml project.

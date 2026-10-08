@@ -1,0 +1,9 @@
+FROM ./hobbylm-1b-sft-3450-Q4_K_M.gguf
+TEMPLATE """{{- range .Messages }}{{ if .Content }}<|{{ .Role }}|>
+{{ .Content }}
+{{ end }}{{ end }}<|assistant|>
+"""
+PARAMETER stop "<|endoftext|>"
+PARAMETER temperature 0
+PARAMETER top_k 1
+PARAMETER num_ctx 4096

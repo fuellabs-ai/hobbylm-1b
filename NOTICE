@@ -1,0 +1,23 @@
+HobbyLM-1B (github.com/fuellabs-ai/hobbylm-1b)
+Copyright 2026 the HobbyLM authors (Harish, Hariharan, Prabhurajhan)
+
+Licence scope
+-------------
+The LICENSE file (Apache License 2.0) applies to:
+- code and documentation written by the HobbyLM authors in this repository, including hobbylm_hf/, examples/,
+  tests/ and gguf/to_gguf_1b.py, except the files under runtimes/ (see below);
+- the HobbyLM architecture and original model code by Harish (github.com/harishsg993010/HobbyLM), released under
+  Apache-2.0 with its author's permission, and derivatives of that code in this repository;
+- the HobbyLM-1B model weights published separately (Hugging Face and the GitHub release), including their GGUF
+  conversions.
+
+It does not apply to, and does not change the licence of:
+- third-party software that this repository's code imports or depends on (for example PyTorch, Transformers, numpy,
+  safetensors and llama.cpp's gguf-py): each keeps its own licence;
+- the patched runtimes and the patches distributed in the GitHub release, and their patches, launchers and build
+  scripts in runtimes/: HobbyLM's own runtime files are MIT (runtimes/LICENSE-HobbyLM-runtime-MIT.txt, and
+  licenses/hobbylm/LICENSE in each package); Ollama's patches 001-002 in runtimes/ollama/patches/ remain
+  Ollama's; and llama.cpp, ggml, Ollama, the GCC runtime and the other bundled components keep their own licences (see each package's licenses/THIRD_PARTY_NOTICES.md);
+- third-party training data (see the model cards' NOTICE files).
+
+The GPT-2 tokenizer files distributed with the models are MIT-licensed (Copyright (c) 2019 OpenAI).

@@ -1,0 +1,13 @@
+diff --git a/src/models/bailingmoe2.cpp b/src/models/bailingmoe2.cpp
+index 24fc4e022..fccb543db 100644
+--- a/src/models/bailingmoe2.cpp
++++ b/src/models/bailingmoe2.cpp
+@@ -43,7 +43,7 @@ void llama_model_bailingmoe2::load_arch_tensors(llama_model_loader &) {
+ 
+         layer.attn_norm = create_tensor(tn(LLM_TENSOR_ATTN_NORM, "weight", i), {n_embd}, flags);
+ 
+-        layer.wqkv = create_tensor(tn(LLM_TENSOR_ATTN_QKV, "weight", i), {n_embd, n_embd + 2*n_embd_gqa}, flags);
++        layer.wqkv = create_tensor(tn(LLM_TENSOR_ATTN_QKV, "weight", i), {n_embd, n_embd_head_k*n_head + 2*n_embd_gqa}, flags);  // HobbyLM patch: decoupled head_dim (Q width = n_head*head_dim)
+         layer.wo = create_tensor(tn(LLM_TENSOR_ATTN_OUT, "weight", i), {n_embd_head_k * n_head, n_embd}, flags);
+ 
+         layer.attn_q_norm = create_tensor(tn(LLM_TENSOR_ATTN_Q_NORM, "weight", i), {n_embd_head_k}, flags);

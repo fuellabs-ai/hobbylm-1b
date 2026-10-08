@@ -1,0 +1,8 @@
+# Tested set (CPU): the Hugging Face Space and the examples in this repository use these versions.
+# The model code requires 4.44.0 <= transformers < 4.47.0.
+torch==2.4.1
+transformers==4.46.3
+tokenizers==0.20.3
+safetensors==0.4.5
+huggingface_hub==0.36.2
+packaging

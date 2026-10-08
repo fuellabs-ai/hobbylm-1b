@@ -1,0 +1,3 @@
+# Check out every file byte-for-byte: the model code must match the Hugging Face copies
+# (hobbylm_hf/SHA256SUMS.txt) and the runtime patches must apply exactly.
+* -text

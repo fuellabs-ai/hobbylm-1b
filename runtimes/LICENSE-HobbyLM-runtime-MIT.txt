@@ -1,0 +1,37 @@
+MIT License
+
+Copyright (c) 2026 the HobbyLM authors
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+-------------------------------------------------------------------------------
+Scope: this MIT licence covers ONLY the HobbyLM-written parts of the runtime packages:
+  - the HobbyLM-written changes in the two llama.cpp patches
+    (bailingmoe2_decoupled_head_dim.patch = Ollama 003-hobbylm-bailingmoe2-decoupled-head-dim.patch,
+     004-win-exit-hang-stream-sessions-static.patch);
+    the unchanged upstream context lines in those patches remain llama.cpp code under llama.cpp's own MIT licence
+    ("Copyright (c) 2023-2026 The ggml authors"), and Ollama's patches 001-002 remain Ollama's (MIT);
+  - the launchers: Start HobbyLM.bat, support\find-running-hobbylm.ps1, support\open-browser-when-ready.ps1,
+    start-chat-server.bat, run-base-completion.bat, start-hobbylm-ollama-server.bat, hobbylm-ollama.bat,
+    Modelfile.hobbylm-1b-sft-q4;
+  - the package documentation written by HobbyLM: READ ME FIRST.txt, README.md, BUILD.md, THIRD_PARTY_NOTICES.md,
+    README_SOURCE.md.
+It does not cover llama.cpp, ggml, Ollama, the GCC runtime, mingw-w64, the web UI's npm packages or any other
+third-party component (each keeps its own licence; see THIRD_PARTY_NOTICES.md), nor the HobbyLM-1B model weights
+(Apache-2.0, distributed separately and in the chat bundle's model\ folder with their own LICENSE.txt).

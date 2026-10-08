@@ -1,0 +1,17 @@
+diff --git a/tools/server/server-stream.cpp b/tools/server/server-stream.cpp
+index f6b9b8a..fb0f914 100644
+--- a/tools/server/server-stream.cpp
++++ b/tools/server/server-stream.cpp
+@@ -62,7 +62,11 @@ private:
+ };
+ 
+ // process wide manager, lifecycle controlled by llama-server main() via start_gc/stop_gc
+-static stream_session_manager g_stream_sessions;
++// Ollama compat (HobbyLM build): intentionally never destroyed. If the process exits without stop_gc() (exit(0) from
++// --version / --list-devices, early error returns), Windows has already terminated the gc thread while it waited on
++// gc_wake_cv; destroying that condition variable during DLL unload then blocks forever in pthread_cond_destroy
++// (MinGW winpthreads), so the process never exits. Normal shutdown still calls server_stream_session_manager_stop().
++static stream_session_manager & g_stream_sessions = *new stream_session_manager();
+ 
+ void server_stream_session_manager_start() {
+     g_stream_sessions.start_gc();
