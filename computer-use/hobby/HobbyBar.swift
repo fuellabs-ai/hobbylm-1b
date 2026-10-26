@@ -609,6 +609,7 @@ final class Hobby: NSObject, NSApplicationDelegate, NSTextFieldDelegate {
     }
 
     func handle(_ m: [String: Any]) {
+        guard mode != .stopped else { return }  // a leftover end/ready from a dead worker must not revive the panel
         let text = m["text"] as? String ?? ""
         switch m["type"] as? String {
         case "ready":
