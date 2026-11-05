@@ -1,0 +1,38 @@
+{
+    "$schema": "https://fundingjson.org/schema/v1.1.0.json",
+    "version": "v1.1.0",
+    "entity": {
+        "type": "organisation",
+        "role": "owner",
+        "name": "Fuel Labs",
+        "email": "prabhurajhan@fuellabs.in",
+        "description": "Fuel Labs is an Indian open-source AI lab founded by Prabhurajhan R. (Prajhan) and Hariharan M. S., both based in India. We build efficient open language models designed to run locally. We pretrained HobbyLM-1B, a sparse mixture-of-experts model with 1.04B total and about 305M active parameters, from scratch on 100B tokens for under $2,000 using GPU credits from Jarvis Labs, and released base and instruct models, documentation and an arXiv paper.",
+        "webpageUrl": { "url": "https://fuellabs.in" }
+    },
+    "projects": [{
+        "guid": "hobbylm",
+        "name": "HobbyLM",
+        "description": "HobbyLM is an open, from-scratch sparse mixture-of-experts language model family built in India. HobbyLM-1B has 1.04B total and about 305M active parameters (64 routed experts, top-8, plus 1 shared expert), pretrained on 100B tokens for under $2,000. Base and instruct models, documentation and a public paper (https://arxiv.org/abs/2610.34582) document what worked and what broke. It is a low-cost, reproducible example for students, researchers and small teams, and it runs locally: a computer-use demo on a MacBook Air completed 90 of 125 sealed tasks with local inference. About 990 Hugging Face downloads so far. Next open release: HobbyLM-Embed, a compact embedding model for local retrieval.",
+        "webpageUrl": { "url": "https://huggingface.co/harims95" },
+        "repositoryUrl": { "url": "https://github.com/fuellabs-ai/hobbylm-1b" },
+        "licenses": ["spdx:Apache-2.0"],
+        "tags": ["llm", "mixture-of-experts", "open-models", "local-ai", "machine-learning", "india"]
+    }],
+    "funding": {
+        "channels": [{
+            "guid": "fuellabs-bank",
+            "type": "bank",
+            "description": "Indian bank account of Fuel Labs. Details shared on request."
+        }],
+        "plans": [{
+            "guid": "hobbylm-2027",
+            "status": "active",
+            "name": "HobbyLM open development grant",
+            "description": "One-time grant over 12 months for maintainer time on HobbyLM. M1 (month 3): improved docs, a reproducible evaluation harness and simple local-run guides for laptops and Macs. M2 (month 6): open release of HobbyLM-Embed weights with published evaluation results, plus a talk or blog post for the FOSS United community. M3 (month 9): quantized local builds, contributor guide and issue triage. M4 (month 12): next open release and a final public report. Quarterly updates on the FOSS United forum.",
+            "amount": 500000,
+            "currency": "INR",
+            "frequency": "one-time",
+            "channels": ["fuellabs-bank"]
+        }]
+    }
+}
